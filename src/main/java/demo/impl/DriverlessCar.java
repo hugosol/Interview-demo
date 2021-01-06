@@ -23,12 +23,12 @@ public class DriverlessCar implements Car {
 
 
     /**
-     * 上传文件到文件存储服务
+     * init the DriverlessCar
      * @param dimensionX
      * @param dimensionY
-     * @param initX
-     * @param initY
-     * @param initOrt
+     * @param initX initialize with positionX
+     * @param initY initialize with positionY
+     * @param initOrt initial direction
      * @return
      * @throws Exception
      */
@@ -45,8 +45,8 @@ public class DriverlessCar implements Car {
     }
 
     /**
-     * 上传文件到文件存储服务
-     * @param command
+     * give a command to move the car
+     * @param command command should be "forward" or "clockwise"(otherwise treat as forward)
      * @throws Exception
      */
     public void move(String command) throws Exception {
@@ -59,7 +59,7 @@ public class DriverlessCar implements Car {
             this.orientation = newDirection;
         }
         else{
-            //输入forward或其他command时前进
+            //"forward" or other command treat as forward
             System.out.print(" moves forward, ");
             forward();
             boundaryCheck();
@@ -71,6 +71,9 @@ public class DriverlessCar implements Car {
 
     }
 
+    /**
+     * move forward
+     */
     private void forward(){
         switch (this.orientation) {
             case E:
@@ -88,6 +91,10 @@ public class DriverlessCar implements Car {
         }
     }
 
+    /**
+     * check if the car is run out of the boundary
+     * @throws Exception
+     */
     private void boundaryCheck() throws Exception {
         if(positionX > dimensionX || positionY > dimensionY || positionX < 1 || positionY < 1){
             System.out.print(" the Car is out of boundary!");

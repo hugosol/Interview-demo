@@ -27,17 +27,17 @@ public enum Orientation
      * @throws Exception
      */
     public static Orientation clockwise(Orientation src){
-        if(src == Orientation.E){
-            return Orientation.S;
-        }else if(src == Orientation.S){
-            return Orientation.W;
-        }else if(src == Orientation.W){
-            return Orientation.N;
-        }else if(src == Orientation.N){
-            return Orientation.E;
-        }else{
-            return null;
+        switch (src) {
+            case E:
+                return Orientation.S;
+            case S:
+                return Orientation.W;
+            case W:
+                return Orientation.N;
+            case N:
+                return Orientation.E;
         }
+        return null;
     }
 
 

@@ -3,6 +3,8 @@ package demo.impl;
 import demo.Car;
 import demo.constant.Orientation;
 
+import static demo.constant.Orientation.*;
+
 
 /**
  * Created by chenlihao on 2021/1/6.
@@ -38,6 +40,8 @@ public class DriverlessCar implements Car {
         this.positionY = initY;
         this.orientation = initOrt;
 
+        System.out.println("A car is initially positioned at X = " + positionX + " and Y = " + positionY + " and facing " + initOrt.getName() + " , and the car park with dimension "+dimensionX+"x"+dimensionY);
+
     }
 
     /**
@@ -50,24 +54,44 @@ public class DriverlessCar implements Car {
         System.out.print("-Given the Car is in position X = " + this.positionX + " and Y = " + this.positionY + " and facing " + this.orientation.getName());
         System.out.print(", when the Car ");
         if("clockwise".equalsIgnoreCase(command)){
-            Orientation newDirection = Orientation.clockwise(this.orientation);
-            System.out.print(" turns clockwise, then the Car is still in the same position but is now facing "+ newDirection);
+            Orientation newDirection = clockwise(this.orientation);
+            System.out.print(" turns clockwise, then the Car is still in the same position but is now facing "+ newDirection.getName());
             this.orientation = newDirection;
         }
         else{
             //输入forward或其他command时前进
             System.out.print(" moves forward, ");
+            forward();
             boundaryCheck();
-
+            System.out.print(" then the Car is still facing " + this.orientation.getName() + " but is now in position X = " + this.positionX + " and Y = " + this.positionY);
         }
+        System.out.println();
 
 
 
     }
 
+    private void forward(){
+        switch (this.orientation) {
+            case E:
+                this.positionX++;
+                break;
+            case S:
+                this.positionY--;
+                break;
+            case W:
+                this.positionX--;
+                break;
+            case N:
+                this.positionY++;
+                break;
+        }
+    }
+
     private void boundaryCheck() throws Exception {
-        if(positionX > dimensionX || positionY > dimensionY || positionX < 0 || positionY < 0){
+        if(positionX > dimensionX || positionY > dimensionY || positionX < 1 || positionY < 1){
             System.out.print(" the Car is out of boundary!");
+            System.out.println();
             throw new Exception("the Car is out of boundary!");
         }
     }

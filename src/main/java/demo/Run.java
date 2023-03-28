@@ -11,6 +11,7 @@ public class Run {
     public static void main(String[] args){
         DriverlessCar carImpl = new DriverlessCar(4,4,1,1, Orientation.N);
         try {
+            System.out.println("test");
             carImpl.move("forward");
             carImpl.move("clockwise");
             carImpl.move("forward");
